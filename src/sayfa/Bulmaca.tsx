@@ -292,7 +292,7 @@ export default function Bulmaca() {
                 <>
                   <strong>{hataVar ? 'Bu değil. Tekrar dene.' : adim <= 1 ? `${siraMetni} oynar. En iyi hamleyi bul.` : 'Doğru! Devam et.'}</strong>
                   <div className="soluk" style={{ fontSize: 13 }}>
-                    {matTema ? TEMA[matTema].ad + ' var.' : 'Kazandıran hamleyi ara: şah, alma, tehdit.'}
+                    {matTema ? (TEMA[matTema]?.ad ?? matTema.replace('mateIn', '') + ' hamlede mat') + ' var.' : 'Kazandıran hamleyi ara: şah, alma, tehdit.'}
                   </div>
                 </>
               )}

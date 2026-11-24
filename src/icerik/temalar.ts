@@ -4,6 +4,7 @@ export const TEMA: Record<string, { ad: string; aciklama: string }> = {
   mateIn2: { ad: '2 hamlede mat', aciklama: 'İki hamlelik zorlayıcı mat.' },
   mateIn3: { ad: '3 hamlede mat', aciklama: 'Üç hamlelik mat ağı.' },
   mateIn4: { ad: '4 hamlede mat', aciklama: 'Uzun mat kombinezonu.' },
+  mateIn5: { ad: '5 hamlede mat', aciklama: 'Çok uzun mat kombinezonu.' },
   mate: { ad: 'Mat', aciklama: 'Oyunu mat ile bitir.' },
   fork: { ad: 'Çatal', aciklama: 'Bir taşla aynı anda iki hedefe saldır.' },
   pin: { ad: 'Açmaz', aciklama: 'Arkasındaki değerli taş yüzünden kımıldayamayan taş.' },
