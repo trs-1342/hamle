@@ -1,0 +1,17 @@
+{
+  "rewrites": [{ "source": "/((?!veri/|engine/|piece/|assets/).*)", "destination": "/index.html" }],
+  "headers": [
+    {
+      "source": "/engine/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/piece/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/veri/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600" }]
+    }
+  ]
+}
