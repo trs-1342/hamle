@@ -1146,3 +1146,94 @@ textarea.giris {
 .simge.soluk {
   color: var(--soluk2);
 }
+
+/* ---------- tam ekran (odak) ---------- */
+.odak-dugme {
+  position: fixed;
+  right: 14px;
+  bottom: 18px;
+  z-index: 30;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  border: 1px solid var(--cizgi2);
+  background: var(--yuzey);
+  color: var(--metin);
+  display: grid;
+  place-items: center;
+  box-shadow: var(--golge);
+  cursor: pointer;
+}
+@media (max-width: 860px) {
+  .odak-dugme {
+    bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+}
+.uygulama.odak {
+  grid-template-columns: 1fr;
+}
+.uygulama.odak .yan,
+.uygulama.odak .ust-cubuk,
+.uygulama.odak .alt-cubuk,
+.uygulama.odak .ust-baslik,
+.uygulama.odak .geri-baglanti {
+  display: none;
+}
+.uygulama.odak .ana {
+  max-width: none;
+  padding: 8px 12px 24px;
+  padding-top: calc(8px + env(safe-area-inset-top));
+}
+.uygulama.odak .calisma-tahta {
+  max-width: min(100%, calc(100dvh - 90px));
+}
+.uygulama.odak .odak-dugme {
+  bottom: calc(14px + env(safe-area-inset-bottom));
+  background: var(--vurgu);
+  border-color: var(--vurgu);
+  color: var(--vurgu-metin);
+}
+@media (max-width: 860px) {
+  .uygulama.odak .ana {
+    padding: 0 0 90px;
+    padding-top: env(safe-area-inset-top);
+  }
+  .uygulama.odak .calisma-tahta {
+    max-width: none;
+  }
+  .uygulama.odak .tahta {
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .uygulama.odak .panel,
+  .uygulama.odak .tahta-alt,
+  .uygulama.odak .oyuncu-serit {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .uygulama.odak .deger-cubuk {
+    border-radius: 0;
+  }
+}
+.takim-sec {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.takim-sec button {
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: var(--yuzey2);
+  cursor: pointer;
+  padding: 6px 4px;
+  font-size: 12px;
+  color: var(--metin);
+}
+.takim-sec button.secili {
+  border-color: var(--vurgu);
+}
+.takim-sec img {
+  width: 30px;
+  height: 30px;
+}

@@ -6,7 +6,7 @@ import Simge from '../bilesen/Simge'
 import { bulmacalar, type Bulmaca as B } from '../lib/veri'
 import { chessYap, uciOyna, type Renk } from '../lib/satranc'
 import { hamleSesi, sesler } from '../lib/ses'
-import { useBulmacaKayit, BULMACA_VARSAYILAN } from '../lib/kayit'
+import { useBulmacaKayit, BULMACA_VARSAYILAN, useAyarlar, tasYolu } from '../lib/kayit'
 import { TEMA, TEMA_GRUP } from '../icerik/temalar'
 
 type Durum = 'hazir' | 'oynaniyor' | 'yanlis' | 'cozuldu' | 'gosterildi'
@@ -19,6 +19,7 @@ const ZORLUK = [
 
 export default function Bulmaca() {
   const [params, setParams] = useSearchParams()
+  const [ayar] = useAyarlar()
   const [liste, setListe] = useState<B[] | null>(null)
   const [hata, setHata] = useState(false)
   const [k, setK] = useBulmacaKayit()
@@ -284,7 +285,7 @@ export default function Bulmaca() {
                 placeItems: 'center',
               }}
             >
-              <img src={`/piece/${oyuncu}K.svg`} width={26} alt="" />
+              <img src={tasYolu(oyuncu + 'K', ayar.taslar)} width={26} alt="" />
             </div>
             <div style={{ flex: 1 }}>
               {durum === 'hazir' && <strong>Rakip oynuyor…</strong>}

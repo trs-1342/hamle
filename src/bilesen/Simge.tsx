@@ -30,6 +30,8 @@ const YOL: Record<string, string> = {
   kitap: 'M2 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2zM22 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z',
   oynat: 'M7 4l12 8-12 8z',
   durdur: 'M7 5h4v14H7zM13 5h4v14h-4z',
+  buyut: 'M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5',
+  kucult: 'M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5',
   bilgi: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 16v-5M12 8h.01',
 }
 

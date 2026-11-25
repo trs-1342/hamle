@@ -25,7 +25,7 @@ export default function Hakkinda() {
             Açılış adları: <a href="https://github.com/lichess-org/chess-openings" target="_blank" rel="noreferrer">lichess-org/chess-openings</a> (CC0).
           </li>
           <li>
-            Taş görselleri: Colin M.L. Burnett, "cburnett" takımı (<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noreferrer">CC BY-SA 3.0</a>).
+            Taş takımları (lichess.org üzerinden): Klasik, Colin M.L. Burnett (GPLv2+) · Merida, Armando Hernandez Marroquin (GPLv2+) · Chessnut, Alexis Luengas (Apache 2.0) · Kelt, Fantastik ve Uzay, Maurizio Monge (MIT).
           </li>
           <li>Kurallar: chess.js (BSD-2).</li>
         </ul>
@@ -34,6 +34,7 @@ export default function Hakkinda() {
         <h3>Klavye</h3>
         <ul style={{ paddingLeft: 18, margin: 0, color: 'var(--soluk)' }}>
           <li>← → hamleler arasında gez, ↑ ↓ başa ve sona git.</li>
+          <li>Tahtalı sayfalarda sağ alttaki düğme tam ekranı açar: menüler gizlenir, tahta ekranı kaplar.</li>
           <li>f tahtayı çevirir.</li>
           <li>Sağ tıkla sürükleyerek ok çiz, tek karede sağ tıkla halka koy (Shift: kırmızı, Alt: mavi).</li>
         </ul>

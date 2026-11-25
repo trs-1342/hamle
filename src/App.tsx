@@ -1,5 +1,5 @@
-import { lazy, Suspense, useState } from 'react'
-import { BrowserRouter, NavLink, Route, Routes, Link } from 'react-router-dom'
+import { lazy, Suspense, useEffect, useState } from 'react'
+import { BrowserRouter, NavLink, Route, Routes, Link, useLocation } from 'react-router-dom'
 import Simge from './bilesen/Simge'
 import AyarlarModal from './bilesen/AyarlarModal'
 import AnaSayfa from './sayfa/AnaSayfa'
@@ -33,11 +33,46 @@ function Logo() {
   )
 }
 
+/** tahtalı sayfalarda tam ekran düğmesi: menüler gizlenir, tahta ekranı kaplar */
+const TAHTALI = /^\/(bulmaca|analiz|oyna|dersler\/.+|acilislar\/.+)$/
+function OdakDugme({ odak, setOdak }: { odak: boolean; setOdak: (v: boolean) => void }) {
+  const yer = useLocation()
+  const tahtali = TAHTALI.test(yer.pathname) || (yer.pathname === '/acilislar' && yer.search.includes('kasif'))
+  useEffect(() => {
+    if (!tahtali && odak) setOdak(false)
+  }, [tahtali, odak, setOdak])
+  useEffect(() => {
+    const f = () => {
+      if (!document.fullscreenElement && odak) setOdak(false)
+    }
+    document.addEventListener('fullscreenchange', f)
+    return () => document.removeEventListener('fullscreenchange', f)
+  }, [odak, setOdak])
+  if (!tahtali) return null
+  const degis = () => {
+    const yeni = !odak
+    setOdak(yeni)
+    try {
+      if (yeni && !document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(() => {})
+      if (!yeni && document.fullscreenElement) document.exitFullscreen?.().catch(() => {})
+    } catch {
+      /* tam ekran desteklenmiyor: yalnız menüler gizlenir */
+    }
+    window.scrollTo(0, 0)
+  }
+  return (
+    <button className="odak-dugme" onClick={degis} aria-label={odak ? 'Tam ekrandan çık' : 'Tam ekran'} title={odak ? 'Tam ekrandan çık' : 'Tam ekran'}>
+      <Simge ad={odak ? 'kucult' : 'buyut'} boy={22} />
+    </button>
+  )
+}
+
 export default function App() {
   const [ayar, setAyar] = useState(false)
+  const [odak, setOdak] = useState(false)
   return (
     <BrowserRouter>
-      <div className="uygulama">
+      <div className={'uygulama' + (odak ? ' odak' : '')}>
         <aside className="yan">
           <Logo />
           {MENU.map((m) => (
@@ -103,6 +138,7 @@ export default function App() {
           ))}
         </nav>
       </div>
+      <OdakDugme odak={odak} setOdak={setOdak} />
       {ayar && <AyarlarModal kapat={() => setAyar(false)} />}
     </BrowserRouter>
   )

@@ -7,4 +7,4 @@ Satranç öğrenme sitesi: temel prensip dersleri, açılış kitaplığı ve ç
 - `node --experimental-strip-types araclar/dogrula.mjs --motor`: ders ve açılış içeriğini yasallık + motorla denetler
 - `veri-ham/` (git dışı) ile `araclar/agac.mjs`: açılış ağacını yeniden üretir
 
-Kaynaklar: lichess açılış ve bulmaca verisi (CC0), cburnett taşları (CC BY-SA 3.0), Stockfish.js (GPLv3).
+Kaynaklar: lichess açılış ve bulmaca verisi (CC0), taş takımları (GPLv2+, Apache 2.0, MIT), Stockfish.js (GPLv3).

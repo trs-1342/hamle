@@ -56,14 +56,17 @@ export function useKayit<T>(k: string, v: T): [T, (x: T | ((p: T) => T)) => void
   return [d, set]
 }
 
+export type TasTakimi = 'cburnett' | 'merida' | 'chessnut' | 'celtic' | 'fantasy' | 'spatial'
 export type Ayarlar = {
   tahta: 'ceviz' | 'cimen' | 'deniz' | 'gri'
+  taslar: TasTakimi
+  tasBoyut: 'normal' | 'buyuk' | 'cokbuyuk'
   koordinat: boolean
   ses: boolean
   yasalGoster: boolean
   trNotasyon: boolean
 }
-export const AYAR_VARSAYILAN: Ayarlar = { tahta: 'ceviz', koordinat: true, ses: true, yasalGoster: true, trNotasyon: false }
+export const AYAR_VARSAYILAN: Ayarlar = { tahta: 'ceviz', taslar: 'cburnett', tasBoyut: 'buyuk', koordinat: true, ses: true, yasalGoster: true, trNotasyon: false }
 
 export function useAyarlar() {
   const [a, setA] = useKayit<Partial<Ayarlar>>('ayarlar', AYAR_VARSAYILAN)
@@ -89,3 +92,15 @@ export type BulmacaKayit = {
 }
 export const BULMACA_VARSAYILAN: BulmacaKayit = { puan: 1200, cozulen: 0, denenen: 0, seri: 0, enIyiSeri: 0, gecmis: [], goruldu: [] }
 export const useBulmacaKayit = () => useKayit<BulmacaKayit>('bulmaca', BULMACA_VARSAYILAN)
+
+export const TAS_TAKIMLARI: { k: TasTakimi; ad: string }[] = [
+  { k: 'cburnett', ad: 'Klasik' },
+  { k: 'merida', ad: 'Merida' },
+  { k: 'chessnut', ad: 'Chessnut' },
+  { k: 'celtic', ad: 'Kelt' },
+  { k: 'fantasy', ad: 'Fantastik' },
+  { k: 'spatial', ad: 'Uzay' },
+]
+export const TAS_OLCEK: Record<Ayarlar['tasBoyut'], number> = { normal: 1, buyuk: 1.08, cokbuyuk: 1.16 }
+/** taş görselinin yolu (t: wK, bN...) */
+export const tasYolu = (t: string, takim: TasTakimi = 'cburnett') => (takim === 'cburnett' ? `/piece/${t}.svg` : `/piece/${takim}/${t}.svg`)

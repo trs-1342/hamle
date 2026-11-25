@@ -7,7 +7,7 @@ import Metin from '../bilesen/Metin'
 import { DERSLER, dersBul } from '../icerik/dersler'
 import { chessYap, sira, uciOyna } from '../lib/satranc'
 import { hamleSesi, sesler } from '../lib/ses'
-import { useIlerleme, ILERLEME_VARSAYILAN } from '../lib/kayit'
+import { useIlerleme, ILERLEME_VARSAYILAN, useAyarlar, tasYolu } from '../lib/kayit'
 
 type Durum = 'bekliyor' | 'yanlis' | 'tamam'
 
@@ -15,6 +15,7 @@ export default function Ders() {
   const { id = '' } = useParams()
   const nav = useNavigate()
   const ders = dersBul(id)
+  const [ayar] = useAyarlar()
   const [ilerleme, setIlerleme] = useIlerleme()
   const [adimNo, setAdimNo] = useState(0)
   const [fen, setFen] = useState('')
@@ -204,7 +205,7 @@ export default function Ders() {
                   <div className="bildirim">Doğru. Devam et.</div>
                 ) : (
                   <div className="bildirim vurgu" style={{ alignItems: 'center' }}>
-                    <img src={`/piece/${oyuncu}K.svg`} width={22} alt="" />
+                    <img src={tasYolu(oyuncu + 'K', ayar.taslar)} width={22} alt="" />
                     <div style={{ flex: 1 }}>{oyuncu === 'w' ? 'Beyaz' : 'Siyah'} oynar. Tahtada hamleni yap.</div>
                   </div>
                 )}

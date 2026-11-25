@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useAyarlar, useKayit, hepsiniSil, type Ayarlar } from '../lib/kayit'
+import { useAyarlar, useKayit, hepsiniSil, tasYolu, TAS_TAKIMLARI, type Ayarlar } from '../lib/kayit'
 import Simge from './Simge'
 
 export function Modal({ kapat, children, baslik }: { kapat: () => void; children: React.ReactNode; baslik: string }) {
@@ -72,6 +72,35 @@ export default function AyarlarModal({ kapat }: { kapat: () => void }) {
           </button>
         ))}
       </div>
+      <div style={{ fontWeight: 600, marginBottom: 8 }}>Taşlar</div>
+      <div className="takim-sec">
+        {TAS_TAKIMLARI.map((t) => (
+          <button key={t.k} className={a.taslar === t.k ? 'secili' : ''} onClick={() => degis('taslar', t.k)}>
+            <div>
+              <img src={tasYolu('wN', t.k)} alt="" />
+              <img src={tasYolu('bQ', t.k)} alt="" />
+            </div>
+            {t.ad}
+          </button>
+        ))}
+      </div>
+      {satir(
+        'Taş boyutu',
+        'Küçük ekranlarda büyük taşlar daha rahat',
+        <div className="sekmeler">
+          {(
+            [
+              ['normal', 'Normal'],
+              ['buyuk', 'Büyük'],
+              ['cokbuyuk', 'Çok büyük'],
+            ] as const
+          ).map(([k, ad]) => (
+            <button key={k} className={a.tasBoyut === k ? 'secili' : ''} onClick={() => degis('tasBoyut', k)}>
+              {ad}
+            </button>
+          ))}
+        </div>,
+      )}
       {satir(
         'Görünüm',
         'Açık, koyu ya da cihazınla aynı',

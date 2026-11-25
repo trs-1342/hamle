@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { Square } from 'chess.js'
 import { chessYap, type Renk } from '../lib/satranc'
-import { useAyarlar } from '../lib/kayit'
+import { useAyarlar, tasYolu, TAS_OLCEK } from '../lib/kayit'
 
 export type Ok = { from: string; to: string; renk?: 'yesil' | 'mavi' | 'kirmizi' | 'sari' | 'gri'; kalin?: number }
 
@@ -221,6 +221,7 @@ export default function Tahta({ fen, yon = 'w', oynar = 'yok', hamle, sonHamle, 
     <div
       ref={kutu}
       className={`tahta tema-${ayar.tahta} ${kucuk ? 'kucuk' : ''} ${oynayabilir ? 'oynanir' : ''} ${sinif}`}
+      style={{ ['--tas-olcek' as string]: TAS_OLCEK[ayar.tasBoyut] ?? 1 }}
       onPointerDown={asagi}
       onPointerMove={hareket}
       onPointerUp={yukari}
@@ -233,9 +234,9 @@ export default function Tahta({ fen, yon = 'w', oynar = 'yok', hamle, sonHamle, 
           const { c, r } = pos(p.sq)
           const surukleniyor = surukle && surukle.sq === p.sq && surukle.oynadi
           const stil: React.CSSProperties = surukleniyor
-            ? { transform: `translate(${surukle!.x}px, ${surukle!.y}px) translate(-50%, -50%) scale(1.12)`, transition: 'none', zIndex: 5 }
-            : { transform: `translate(${c * 100}%, ${r * 100}%)` }
-          return <img key={p.id} className={'tas' + (surukleniyor ? ' tutulan' : '')} src={`/piece/${p.t}.svg`} alt="" draggable={false} style={stil} />
+            ? { transform: `translate(${surukle!.x}px, ${surukle!.y}px) translate(-50%, -50%) scale(calc(1.12 * var(--tas-olcek, 1)))`, transition: 'none', zIndex: 5 }
+            : { transform: `translate(${c * 100}%, ${r * 100}%) scale(var(--tas-olcek, 1))` }
+          return <img key={p.id} className={'tas' + (surukleniyor ? ' tutulan' : '')} src={tasYolu(p.t, ayar.taslar)} alt="" draggable={false} style={stil} />
         })}
       </div>
       {tumOklar.length > 0 && (
@@ -286,7 +287,7 @@ export default function Tahta({ fen, yon = 'w', oynar = 'yok', hamle, sonHamle, 
                   hamle?.(f.from, f.to, t)
                 }}
               >
-                <img src={`/piece/${siraRenk}${t.toUpperCase()}.svg`} alt={t} />
+                <img src={tasYolu(siraRenk + t.toUpperCase(), ayar.taslar)} alt={t} />
               </button>
             ))}
             <button className="terfi-vazgec" onClick={() => setTerfi(null)}>
